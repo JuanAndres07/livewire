@@ -15,7 +15,7 @@
                 <x-label>
                     Contenido
                 </x-label>
-                <x-textarea class="w-full" wire:model="postCreate,content">  </x-textarea>
+                <x-textarea class="w-full" wire:model="postCreate.content">  </x-textarea>
 
                 <x-input-error for="postCreate.content" />
             </div>
@@ -108,7 +108,7 @@
                     </x-label>
                     <x-input class="w-full" wire:model="postEdit.title" />
 
-                    <x-input-error for="postEdit.title "/>
+                    <x-input-error for="postEdit.title" />
                 </div>
 
                 <div class="mb-4">
@@ -117,7 +117,7 @@
                     </x-label>
                     <x-textarea class="w-full" wire:model="postEdit.content" >  </x-textarea>
 
-                    <x-input-error for="postEdit.content"/>
+                    <x-input-error for="postEdit.content" />
                 </div>
 
                 <div class="mb-4">
@@ -134,7 +134,7 @@
                         @endforeach
                     </x-select>
 
-                    <x-input-error for="postEdit.category_id"/>
+                    <x-input-error for="postEdit.category_id" />
                 </div>
 
                 <div class="mb-4">
@@ -153,7 +153,7 @@
                         @endforeach
                     </ul>
 
-                    <x-input-error for="postEdit.tags"/>
+                    <x-input-error for="postEdit.tags" />
 
                 </div>
 

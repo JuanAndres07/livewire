@@ -6,20 +6,13 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use Livewire\Attributes\Rule;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class Formulario extends Component
 {
     public $categories, $tags;
 
-    /* #[Rule([
-        'postCreate.title' => 'required',
-        'postCreate.content' => 'required',
-        'postCreate.category_id' => 'required|exits:categories,id',
-        'postCreate.tags' => 'required|array',
-    ], [
-        'postCreate.category_id' => 'categoria',
-    ])] */
     public $postCreate = [
         'title' => '',
         'content' => '',
@@ -45,7 +38,7 @@ class Formulario extends Component
         return [
             'postCreate.title' => 'required',
             'postCreate.content' => 'required',
-            'postCreate.category_id' => 'required|exits:categories,id',
+            'postCreate.category_id' => 'required|exists:categories,id',
             'postCreate.tags' => 'required|array',
         ];
     }
@@ -76,23 +69,6 @@ class Formulario extends Component
     {
         $this->validate();
 
-        /* $this->validate([
-            'title' => 'required',
-            'content' => 'required',
-            'category_id' => 'required|exists:categories,id',
-            'selectedTags' => 'required|array'
-        ], [
-            'title.required' => 'El campo titulo es requerido',
-        ], [
-            'category_id' => 'categoria',
-        ]); */
-
-        /* $post = Post::create([
-            'category_id' => $this->category_id,
-            'title' => $this->title,
-            'content' => $this->content,
-        ]); */
-
         $post = Post::create([
             'category_id' => $this->postCreate['category_id'],
             'title' => $this->postCreate['title'],
@@ -108,6 +84,8 @@ class Formulario extends Component
 
     public function edit($postId)
     {
+        $this->resetValidation();
+
         $this->open = true;
 
         $this->postEditId = $postId;
@@ -117,7 +95,6 @@ class Formulario extends Component
         $this->postEdit['category_id'] = $post->category_id;
         $this->postEdit['title'] = $post->title;
         $this->postEdit['content'] = $post->content;
-
         $this->postEdit['tags'] = $post->tags->pluck('id')->toArray();
 
     }
@@ -127,7 +104,7 @@ class Formulario extends Component
         $this->validate([
             'postEdit.title' => 'required',
             'postEdit.content' => 'required',
-            'postEdit.category_id' => 'required|exits:categories,id',
+            'postEdit.category_id' => 'required|exists:categories,id',
             'postEdit.tags' => 'required|array',
         ]);
 
