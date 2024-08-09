@@ -92,7 +92,7 @@
     {{-- Formulario de edición --}}
 
     <form wire:submit="update">
-        <x-dialog-modal wire:model="open">
+        <x-dialog-modal wire:model="postEdit.open">
 
             <x-slot name="title">
 
@@ -163,7 +163,7 @@
 
                 <div class="flex justify-end">
 
-                    <x-danger-button class="mr-2" wire:click="$set('open', false)">
+                    <x-danger-button class="mr-2" wire:click="$set('postEdit.open', false)">
                         Cancelar
                     </x-danger-button>
                     <x-button>
